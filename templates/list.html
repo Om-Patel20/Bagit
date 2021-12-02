@@ -1,0 +1,39 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<hr>
+
+
+<div class="row">
+    {% for each in object_list %}
+    <div class="col" style="padding-bottom: 0.5em;">
+        <div class="card" style="width: 13rem;">
+            <img src="{{ each.image_url }}" class="card-img-top" alt="..." style="height:200px;">
+            <div class="card-body">
+                <h5 class="card-title space">{{ each.name|slice:":18"}} ...</h5>
+                <span class="card-text space" >${{ each.price|floatformat:2 }}</span>                
+                {% if each.book_available is True %}
+                <span class="text-primary space" style="list-style-type: none;">Available</span>
+                {% else %}
+                <span class="text-danger space" style="list-style-type: none;">Out of Stock !</span>
+                {% endif %}
+                <li style="list-style-type: none;">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                </li>
+                <br>
+                <a href="{% url 'detail' each.id %}" class="btn btn-primary">View</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}
+
